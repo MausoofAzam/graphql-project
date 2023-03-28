@@ -1,0 +1,51 @@
+type Mutation {
+	createStudent(createStudentRequest : CreateStudentRequest) : StudentResponse
+	addStudents(students: [StudentInput]): [Student]
+}
+type Student {
+	id: ID
+	firstName: String
+	lastName: String
+	email: String
+	address: Address
+	learningSubjects: [Subject]
+}
+type Address {
+	street: String
+	city: String
+}
+
+type Subject {
+	id: ID!
+	subjectName: String!
+	marksObtained: Float!
+	student: Student!
+}
+input StudentInput {
+	firstName: String!
+	lastName: String!
+	email: String!
+	address: AddressInput!
+	learningSubjects: [SubjectInput!]!
+}
+input AddressInput {
+	street: String!
+	city: String!
+}
+input SubjectInput {
+	subjectName: String!
+	marksObtained: Float!
+}
+
+input CreateStudentRequest {
+	firstName : String
+	lastName : String
+	email : String
+	street : String
+	city : String
+	subjectsLearning : [CreateSubjectRequest]
+}
+input CreateSubjectRequest {
+	subjectName : String
+	marksObtained : Float
+}
